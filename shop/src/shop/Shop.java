@@ -45,6 +45,86 @@ public class Shop {
 	public Shop(String name) {
 		this.NAME = name;
 	}
+	
+	private void reset() {
+		userManager = UserManager.getInstance();
+		itemManager = ItemManager.getInstance();
+		addAdminUser();
+
+		revenue = 0;
+		loginUserUID = -1;
+	}
+	
+	private void addAdminUser() {
+		final String ID = "a";
+		final String PW = "a";
+
+		userManager.addUser(new User(ID, PW), ADMIN_UID);
+	}
+	
+	private boolean canAccessMenu(int menu) {
+		if (isUserLoggedIn()) {
+			if (doesMenuRequireLogout(menu)) {
+				System.out.println("로그아웃 후 이용 가능합니다");
+				return false;
+			}
+
+			return true;
+		} else {
+			if (doesMenuRequireLogin(menu)) {
+				System.out.println("로그인 후 이용 가능합니다");
+				return false;
+			}
+
+			return true;
+		}
+	}
+
+	private boolean doesMenuRequireLogin(int menu) {
+		switch (menu) {
+			case USER_DELETE:
+			case LOG_OUT:
+			case SHOP:
+			case MY_PAGE:
+				return true;
+			
+			default:
+				return false;
+		}
+	}
+
+	private boolean doesMenuRequireLogout(int menu) {
+		switch (menu) {
+			case USER_ADD:
+			case LOG_IN:
+				return true;
+			
+			default:
+				return false;
+		}
+	}
+	
+	private boolean isUserLoggedIn() {
+		return loginUserUID != -1;
+	}
+
+	private String getInputString(String message) {
+		System.out.print(message + ": ");
+		return sc.next();
+	}
+	
+	private int getInputNumber(String message) {
+		int number = -1;
+
+		try {
+			String input = getInputString(message);
+			number = Integer.parseInt(input);
+		} catch (Exception e) {
+			System.out.println("숫자만 입력 가능합니다");
+		}
+		
+		return number;
+	}
 
 	private void printMainMenu() {
 		System.out.printf("== %s ==\n", NAME);
