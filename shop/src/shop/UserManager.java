@@ -4,15 +4,6 @@ import java.util.ArrayList;
 
 public class UserManager {
 	private ArrayList<User> users = new ArrayList<User>();
-	
-	private User getUserById(String id) {
-		for (User user : users) {
-			if (user.getId().equals(id))
-				return user;
-		}
-		
-		return null;
-	}
 
 	private int getIndexOfUser(User user) {
 		for (int i = 0; i < users.size(); i++) {
@@ -23,6 +14,15 @@ public class UserManager {
 		return -1;
 	}
 	
+	private User getUserById(String id) {
+		for (User user : users) {
+			if (user.getId().equals(id))
+				return user;
+		}
+		
+		return null;
+	}
+
 	public User getUserByUID(int UID) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getUID() == UID)
@@ -45,6 +45,23 @@ public class UserManager {
 		return (ArrayList<User>) users.clone();
 	}
 	
+	public void addUser(User user) {
+		users.add(new User(generateUserUID(), user.getId(), user.getPassword(), user.getCart()));
+	}
+
+	public void deleteUser(User user) {
+		User foundUser = getUserById(user.getId());
+		users.remove(foundUser);
+	}
+	
+	public void updateUser(User user) {
+		users.set(getIndexOfUser(user), user);
+	}
+
+	public boolean doesUserIdExist(String id) {
+		return getUserById(id) == null ? false : true;
+	}
+
 	private int generateUserUID() {
 		int id = (int)(Math.random() * 1000000);
 
@@ -56,23 +73,5 @@ public class UserManager {
 		}
 		
 		return id;
-	}
-
-	public void addUser(User user) {
-		users.add(new User(generateUserUID(), user.getId(), user.getPassword(), user.getCart()));
-	}
-
-	public void deleteUser(User user) {
-		User foundUser = getUserById(user.getId());
-
-		users.remove(foundUser);
-	}
-	
-	public void updateUser(User user) {
-		users.set(getIndexOfUser(user), user);
-	}
-
-	public boolean doesUserIdExist(String id) {
-		return getUserById(id) == null ? false : true;
 	}
 }
