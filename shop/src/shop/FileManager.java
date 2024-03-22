@@ -13,7 +13,6 @@ public class FileManager {
 	private FileManager() { }
 	
 	public static void save(String data) {
-		System.out.println(data);
 		try {
 			fw = new FileWriter(FILE_NAME);
 
