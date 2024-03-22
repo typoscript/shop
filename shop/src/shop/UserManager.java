@@ -5,8 +5,31 @@ import java.util.ArrayList;
 public class UserManager {
 	private ArrayList<User> users = new ArrayList<User>();
 	
-	public User getUserByIndex(int index) {
-		return this.users.get(index);
+	private User getUserById(String id) {
+		for (User user : users) {
+			if (user.getId().equals(id))
+				return user;
+		}
+		
+		return null;
+	}
+
+	private int getIndexOfUser(User user) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUID() == user.getUID())
+				return i;
+		}
+		
+		return -1;
+	}
+	
+	public User getUserByUID(int UID) {
+		for (int i = 0; i < users.size(); i++) {
+			if (users.get(i).getUID() == UID)
+				return users.get(i).clone();
+		}
+
+		return null;
 	}
 	
 	public User getUserByIdAndPassword(String id, String password) {
@@ -15,39 +38,14 @@ public class UserManager {
 		if (user == null || !user.getPassword().equals(password))
 			return null;
 
-		return user;
+		return user.clone();
+	}
+
+	public ArrayList<User> getUsers() {
+		return (ArrayList<User>) users.clone();
 	}
 	
-	private User getUserById(String id) {
-		for (User user : users) {
-			if (user.getId() == id)
-				return user;
-		}
-		
-		return null;
-	}
-	
-	private int getIndexOfUser(User user) {
-		for (int i = 0; i < users.size(); i++) {
-			if (users.get(i).equals(user))
-				return i;
-		}
-
-		return -1;
-	}
-
-	public void addUser(User user) {
-		users.add(user);
-	}
-
-	public void deleteUser(User user) {
-		int index = getIndexOfUser(user);
-		
-		if (index >= 0)
-			users.remove(index);
-	}
-
-	public int genereateUserUID() {
+	private int generateUserUID() {
 		int id = (int)(Math.random() * 1000000);
 
 		for (int i = 0; i < users.size(); i++) {
@@ -59,7 +57,21 @@ public class UserManager {
 		
 		return id;
 	}
+
+	public void addUser(User user) {
+		users.add(new User(generateUserUID(), user.getId(), user.getPassword(), user.getCart()));
+	}
+
+	public void deleteUser(User user) {
+		User foundUser = getUserById(user.getId());
+
+		users.remove(foundUser);
+	}
 	
+	public void updateUser(User user) {
+		users.set(getIndexOfUser(user), user);
+	}
+
 	public boolean doesUserIdExist(String id) {
 		return getUserById(id) == null ? false : true;
 	}
