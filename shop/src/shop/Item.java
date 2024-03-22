@@ -36,16 +36,27 @@ public class Item {
 		return price;
 	}
 	
-	public void setCount(int quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	public void increaseQuantity(int quantity) {
+		this.quantity += quantity;
+	}
+
+	public void decreaseQuantity(int quantity) {
+		this.quantity -= quantity;
+	}
 	
+
+	@Override
+	public Item clone() {
+		return new Item(UID, name, price, quantity);
+	}
+
 	@Override
 	public String toString() {
 		return String.format("상품: %s | 가격: %d원 | 수량: %d개", name, price, quantity);
 	}
 	
-	public Item clone() {
-		return new Item(UID, name, price, quantity);
-	}
 }
