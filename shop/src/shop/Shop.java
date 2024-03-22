@@ -61,7 +61,149 @@ public class Shop {
 
 		userManager.addUser(new User(ID, PW), ADMIN_UID);
 	}
+
+	public void run() {
+		reset();
+
+		while (true) {
+			printMainMenu();
+			
+			int menu = getInputNumber("메뉴");
+			runMainMenu(menu);
+		}
+	}
 	
+	private void runMainMenu(int menu) {
+		switch (menu) {
+			case USER:
+				printUserMenu();
+				runUserMenu();
+				break;
+			case FILE:
+				printFileMenu();
+				runFileMenu();
+				break;
+			case ADMIN:
+				if (loginUserUID != ADMIN_UID) {
+					System.out.println("관리자가 아닙니다");
+					break;
+				}
+
+				printAdminMenu();
+				runAdminMenu();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+	
+	private void runUserMenu() {
+		int menu = getInputNumber("메뉴");
+
+		if (!canAccessMenu(menu))
+			return;
+
+		switch (menu) {
+			case USER_ADD:
+				addUser();
+				break;
+			case USER_DELETE:
+				deleteUser();
+				break;
+			case LOG_IN:
+				login();
+				break;
+			case LOG_OUT:
+				logout();
+				break;
+			case SHOP:
+				shop();
+				break;
+			case MY_PAGE:
+				printMyPageMenu();
+				runMyPageMenu();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+
+	private void runMyPageMenu() {
+		int menu = getInputNumber("메뉴");
+		
+		switch (menu) {
+			case MY_CART_VIEW:
+				viewUserCart();
+				break;
+			case MY_CART_DELETE_ITEM:
+				deleteItemFromUserCart();
+				break;
+			case MY_CART_CHANGE_QUANTITY:
+				changeItemQuantityFromUserCart();
+				break;
+			case MY_CART_PAYMENT:
+				payFromCart();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+
+	private void runFileMenu() {
+		int menu = getInputNumber("메뉴");
+
+		switch (menu) {
+			case FILE_SAVE:
+				FileManager.save(convertDataToString());
+				break;
+			case FILE_LOAD:
+				loadDataFromFile();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+
+	private void runAdminMenu() {
+		int menu = getInputNumber("메뉴");
+
+		switch (menu) {
+			case ADMIN_ITEM:
+				printAdminItemMenu();
+				runAdminItemMenu();
+				break;
+			case ADMIN_VIEW_REVENUE:
+				printRevenue();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+
+	private void runAdminItemMenu() {
+		int menu = getInputNumber("메뉴");
+
+		switch (menu) {
+			case ADMIN_ITEM_ADD:
+				runAddItem();
+				break;
+			case ADMIN_ITEM_DELETE:
+				runDeleteItem();
+				break;
+			case ADMIN_ITEM_MODIFY:
+				runModifyItem();
+				break;
+			default:
+				System.out.println("잘못된 메뉴입니다");
+				break;
+		}
+	}
+
 	private boolean canAccessMenu(int menu) {
 		if (isUserLoggedIn()) {
 			if (doesMenuRequireLogout(menu)) {
