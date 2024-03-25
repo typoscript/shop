@@ -451,6 +451,8 @@ public class Shop {
 		
 		itemManager.addItem(new Item(name, price, quantity));
 		System.out.println("상품 추가 성공");
+
+		FileManager.save(convertDataToString());
 	}
 
 	private void runDeleteItem() {
@@ -478,6 +480,8 @@ public class Shop {
 		}
 		
 		System.out.println("상품 삭제 성공");
+
+		FileManager.save(convertDataToString());
 	}
 
 	private void runModifyItem() {
@@ -513,6 +517,8 @@ public class Shop {
 		itemManager.setItem(index, modifiedItem);
 		
 		System.out.println("상품 수정 완료");
+
+		FileManager.save(convertDataToString());
 	}
 	
 	private String convertDataToString() {
