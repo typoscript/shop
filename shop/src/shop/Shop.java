@@ -435,6 +435,12 @@ public class Shop {
 	
 	private void loadDataFromFile() {
 		String data = FileManager.load();
+		
+		if (data.isEmpty()) {
+			System.out.println("파일에 데이터가 없습니다");
+			return;
+		}
+
 		String[] dataArr = data.split("\n");
 
 		loadItemData(dataArr[0]);
