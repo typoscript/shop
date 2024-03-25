@@ -333,8 +333,6 @@ public class Shop {
 		userManager.updateUser(user);
 
 		System.out.println("수량 변경 성공");
-
-		FileManager.save(convertDataToString());
 	}
 
 	private void payFromUserCart() {
