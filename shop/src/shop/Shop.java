@@ -370,6 +370,8 @@ public class Shop {
 		}
 
 		System.out.println("===========");
+
+		FileManager.save(convertDataToString());
 	}
 	
 	private void loadItemData(String data) {
