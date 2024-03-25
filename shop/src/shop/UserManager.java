@@ -68,6 +68,10 @@ public class UserManager {
 	public void updateUser(User user) {
 		users.set(getIndexOfUser(user), user);
 	}
+	
+	public void clearUsers() {
+		users.clear();
+	}
 
 	public boolean doesUserIdExist(String id) {
 		return getUserById(id) == null ? false : true;
