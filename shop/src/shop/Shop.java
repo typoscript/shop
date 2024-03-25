@@ -46,7 +46,7 @@ public class Shop {
 		this.NAME = name;
 	}
 	
-	private void reset() {
+	private void initSettings() {
 		userManager = UserManager.getInstance();
 		itemManager = ItemManager.getInstance();
 		addAdminUser();
@@ -63,7 +63,7 @@ public class Shop {
 	}
 
 	public void run() {
-		reset();
+		initSettings();
 
 		while (true) {
 			printMainMenu();
