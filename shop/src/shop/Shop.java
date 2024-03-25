@@ -45,7 +45,9 @@ public class Shop {
 	private void initSettings() {
 		userManager = UserManager.getInstance();
 		itemManager = ItemManager.getInstance();
+
 		addAdminUser();
+		loadDataFromFile();
 
 		revenue = 0;
 		loginUserUID = -1;
