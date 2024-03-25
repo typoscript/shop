@@ -193,6 +193,8 @@ public class Shop {
 		
 		userManager.addUser(new User(id, password));
 		System.out.println("회원가입 성공");
+		
+		FileManager.save(convertDataToString());
 	}
 
 	private void deleteUser() {
@@ -209,6 +211,8 @@ public class Shop {
 		userManager.deleteUser(user);
 		loginUserUID = -1;
 		System.out.println("회원탈퇴 성공");
+
+		FileManager.save(convertDataToString());
 	}
 		
 	private void login() {
