@@ -612,8 +612,7 @@ public class Shop {
 	private void printMainMenu() {
 		System.out.printf("== %s ==\n", NAME);
 		System.out.println("1. 유저");
-		System.out.println("2. 파일");
-		System.out.println("3. 관리자");
+		System.out.println("2. 관리자");
 	}	
 	
 	private void printUserMenu() {
