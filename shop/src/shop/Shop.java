@@ -301,6 +301,8 @@ public class Shop {
 		itemManager.increaseItemQuantity(shopItem, userItem.getQuantity());
 		
 		System.out.println("상품 삭제 성공");
+
+		FileManager.save(convertDataToString());
 	}
 	
 	private void changeItemQuantityFromUserCart() {
@@ -331,6 +333,8 @@ public class Shop {
 		userManager.updateUser(user);
 
 		System.out.println("수량 변경 성공");
+
+		FileManager.save(convertDataToString());
 	}
 
 	private void payFromUserCart() {
