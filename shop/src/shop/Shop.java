@@ -385,6 +385,8 @@ public class Shop {
 	}
 	
 	private void loadItemData(String data) {
+		itemManager.clearItems();
+		
 		String[] items = data.split("/");
 		
 		for (String item : items) {
@@ -400,6 +402,8 @@ public class Shop {
 	}
 	
 	private void loadUserData(String[] users) {
+		userManager.clearUsers();
+
 		for (int i = 1; i < users.length; i++) {
 			String[] userData = users[i].split("/");
 			String[] userInfo = userData[0].split(",");
