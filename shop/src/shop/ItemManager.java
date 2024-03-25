@@ -31,6 +31,10 @@ public class ItemManager {
 		return null;
 	}
 
+	public Item getItemByIndex(int index) {
+		return items.get(index).clone();
+	}
+
 	public Item getItem(Item item) {
 		Item foundItem = getItemByUID(item.getUID());
 
@@ -41,10 +45,6 @@ public class ItemManager {
 		return (ArrayList<Item>) items.clone();
 	}
 	
-	public Item getItemByIndex(int index) {
-		return items.get(index).clone();
-	}
-
 	public int getItemSize() {
 		return items.size();
 	}
@@ -87,6 +87,10 @@ public class ItemManager {
 	public void deleteItem(Item item) {
 		Item foundItem = getItemByClonedItem(item);
 		items.remove(foundItem);
+	}
+	
+	public void clearItems() {
+		items.clear();
 	}
 	
 	public void increaseItemQuantity(Item item, int quantity) {
