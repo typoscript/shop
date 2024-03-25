@@ -257,6 +257,8 @@ public class Shop {
 		user.addItem(item);
 		userManager.updateUser(user);
 		System.out.println("상품 담기 성공");
+
+		FileManager.save(convertDataToString());
 	}
 
 	private void viewUserCart() {
