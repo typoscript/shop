@@ -5,8 +5,7 @@ import java.util.Scanner;
 
 public class Shop {
 	private final int USER = 1;
-	private final int FILE = 2;
-	private final int ADMIN = 3;
+	private final int ADMIN = 2;
 	
 	private final int USER_ADD = 1;
 	private final int USER_DELETE = 2;
@@ -20,9 +19,6 @@ public class Shop {
 	private final int MY_CART_CHANGE_QUANTITY = 3;
 	private final int MY_CART_PAYMENT = 4;
 
-	private final int FILE_SAVE = 1;
-	private final int FILE_LOAD = 2;
-	
 	private final int ADMIN_ITEM = 1;
 	private final int ADMIN_VIEW_REVENUE = 2;
 
@@ -78,10 +74,6 @@ public class Shop {
 			case USER:
 				printUserMenu();
 				runUserMenu();
-				break;
-			case FILE:
-				printFileMenu();
-				runFileMenu();
 				break;
 			case ADMIN:
 				if (loginUserUID != ADMIN_UID) {
@@ -145,22 +137,6 @@ public class Shop {
 				break;
 			case MY_CART_PAYMENT:
 				payFromUserCart();
-				break;
-			default:
-				System.out.println("잘못된 메뉴입니다");
-				break;
-		}
-	}
-
-	private void runFileMenu() {
-		int menu = getInputNumber("메뉴");
-
-		switch (menu) {
-			case FILE_SAVE:
-				FileManager.save(convertDataToString());
-				break;
-			case FILE_LOAD:
-				loadDataFromFile();
 				break;
 			default:
 				System.out.println("잘못된 메뉴입니다");
@@ -654,11 +630,6 @@ public class Shop {
 		System.out.println("4. 결제");
 	}	
 	
-	private void printFileMenu() {
-		System.out.println("1. 자동저장");
-		System.out.println("2. 자동로드");
-	}	
-
 	private void printAdminMenu() {
 		System.out.println("1. 아이템");
 		System.out.println("2. 조회");
