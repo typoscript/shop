@@ -283,8 +283,7 @@ public class Shop {
 		Cart cart = user.getCart();
 		ArrayList<Item> items = cart.getItems();
 		
-		for (int i = 0; i < items.size(); i++)
-			System.out.println((i + 1) + ") " + items.get(i));
+		cart.printItemList();
 		
 		int index = getInputNumber("상품의 숫자: ") - 1;
 		
@@ -310,8 +309,7 @@ public class Shop {
 		Cart cart = user.getCart();
 		ArrayList<Item> items = cart.getItems();
 
-		for (int i = 0; i < items.size(); i++)
-			System.out.println((i + 1) + ") " + items.get(i));
+		cart.printItemList();
 		
 		int index = getInputNumber("상품의 숫자: ") - 1;
 		
