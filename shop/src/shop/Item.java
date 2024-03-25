@@ -2,9 +2,9 @@ package shop;
 
 public class Item {
 	private final int UID;
-	private int quantity;
-	private int price;
 	private String name;
+	private int price;
+	private int quantity;
 
 	public Item(String name, int price, int quantity) {
 		this.UID = -1;
@@ -33,7 +33,7 @@ public class Item {
 	}
 
 	public int getQuantity() {
-		return price;
+		return quantity;
 	}
 	
 	public void setQuantity(int quantity) {
@@ -47,7 +47,6 @@ public class Item {
 	public void decreaseQuantity(int quantity) {
 		this.quantity -= quantity;
 	}
-	
 
 	@Override
 	public Item clone() {
