@@ -422,7 +422,10 @@ public class Shop {
 				user.addItem(userItem);
 			}
 
-			userManager.addUser(user);
+			if (UID == ADMIN_UID)
+				userManager.deleteUser(user);
+
+			userManager.addUser(user, UID);
 		}
 		
 	}
