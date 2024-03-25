@@ -431,7 +431,6 @@ public class Shop {
 
 			userManager.addUser(user, UID);
 		}
-		
 	}
 	
 	private void loadDataFromFile() {
